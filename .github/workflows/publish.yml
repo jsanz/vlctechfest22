@@ -12,12 +12,15 @@ jobs:
 
       - name: Setup node 💪
         uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
       
       - name: Install dependencies ⛏️
         run: npm install
       
       - name: Build the website 🏗️
-        run : npx parcel build src/index.html
+        run : npx parcel build src/index.html --public-url .
       
       - name: Publish 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.4
