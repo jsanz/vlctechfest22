@@ -14,13 +14,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16'
-          cache: 'npm'
       
       - name: Install dependencies ⛏️
-        run: npm install
+        run: yarn install --frozen-lockfile
       
       - name: Build the website 🏗️
-        run : npx parcel build src/index.html --public-url .
+        run : yarn build
       
       - name: Publish 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.4
