@@ -1,0 +1,16 @@
+{
+  "name": "vlctechfest22",
+  "version": "1.0.0",
+  "description": "Charla para la VLC Tech Fest 2022",
+  "author": "Jorge Sanz <jorge@jorgesanz.net>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel buid src/index.html -d dist --public-url ."
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5",
+    "reveal.js": "^4.3.1"
+  }
+}
