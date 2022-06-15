@@ -1,0 +1,6 @@
+Slides created with reveal.js
+
+* Presenter: Jorge Sanz <https://jorgesanz.net>
+* Bundler: parcel v2
+* Styles: http://nordtheme.com/
+* Editor: VS Code

@@ -6,18 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Análisis y visualización de la erupción del Cumbre Vieja</title>
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
-    <style>
-      @import url("../node_modules/reveal.js/dist/reveal.css");
-      @import url("../node_modules/reveal.js/dist/theme/white.css");
-    </style>
+    <link rel="stylesheet" href="../node_modules/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="style.scss">
   </head>
   <body>
     <div class="reveal">
       <div class="slides">
-        <section>
-            <h1>Análisis y visualización de la erupción del Cumbre Vieja</h1>
+        <section data-markdown
+          data-separator="^---"
+          data-separator-vertical="^___"
+          data-charset="utf-8"
+          data-notes="^Note:">
+          <textarea data-template id="slides-content"></textarea>
         </section>
-        <section>Slide 2</section>
       </div>
     </div>
     <script type="module" src="./index.js"></script>
