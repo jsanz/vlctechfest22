@@ -1,11 +1,12 @@
 import Reveal from 'reveal.js';
-import Markdown from 'reveal.js/plugin/markdown/markdown.esm.js';
-import slidesText from 'bundle-text:./slides.md';
+import Notes from 'reveal.js/plugin/notes/notes.esm.js';import Markdown from 'reveal.js/plugin/markdown/markdown.esm.js';
+import content from 'bundle-text:./content.md';
 
 
 document.addEventListener('DOMContentLoaded', function(){
-   let slidesTemplate = document.getElementById('slides-content');
-   slidesTemplate.textContent = slidesText;
+
+   let introTemplate = document.getElementById('slides-content');
+   introTemplate.textContent = content;
 
    let deck = new Reveal({
       slideNumber: 'c/t',
@@ -14,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function(){
       loop: true,
       transition: 'fade',
       showNotes: false,
-      plugins: [ Markdown ]
+      plugins: [ Markdown, Notes]
    })
    deck.initialize();
 });

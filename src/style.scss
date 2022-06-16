@@ -10,23 +10,21 @@
 
 
 // Include theme-specific fonts
-@import url(https://fonts.googleapis.com/css?family=Montserrat:700);
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic);
-
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&family=Montserrat:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
 // Override theme settings (see ../template/settings.scss)
 $backgroundColor: $nord1;
 $selectionBackgroundColor: $nord12;
 
-$mainFont: 'Open Sans', sans-serif;
+$mainFont: 'Montserrat', sans-serif;
+$mainFontSize: 35px;
 
-$headingFont: 'Montserrat', Impact, sans-serif;
-
+$headingFont: 'Comfortaa', Impact, sans-serif;
+$headingColor: $nord8;
 $headingTextShadow: none;
 $headingLetterSpacing: -0.03em;
 $headingTextTransform: none;
-
-$heading1Size: 2.5em;
+$headingFontWeight: 300;
 
 $linkColor: $nord7;
 $linkColorHover: lighten( $linkColor, 20% );
@@ -35,6 +33,12 @@ $linkColorHover: lighten( $linkColor, 20% );
 @include light-bg-text-color($nord1);
 
 
-
 // Template building
 @import "../node_modules/reveal.js/css/theme/template/theme.scss";
+
+// Custom styles after theme
+.reveal {
+    section {
+        font-weight: 400;
+    }
+}

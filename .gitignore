@@ -104,3 +104,7 @@ dist
 .tern-port
 
 .parcel-cache
+
+src/export
+
+.vscode
