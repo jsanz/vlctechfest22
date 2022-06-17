@@ -1,0 +1,78 @@
+// Reveal bootstrap
+
+@import "../node_modules/reveal.js/css/theme/template/mixins.scss";
+@import "../node_modules/reveal.js/css/theme/template/settings.scss";
+
+
+/* My theme */
+
+@import "../node_modules/nord/src/sass/nord.scss";
+
+
+// Include theme-specific fonts
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&family=Montserrat:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+// Override theme settings (see ../template/settings.scss)
+$backgroundColor: $nord1;
+$selectionBackgroundColor: $nord12;
+
+$mainFont: 'Montserrat', sans-serif;
+$mainFontSize: 35px;
+
+$headingFont: 'Comfortaa', Impact, sans-serif;
+$headingColor: $nord8;
+$headingTextShadow: none;
+$headingLetterSpacing: -0.03em;
+$headingTextTransform: none;
+$headingFontWeight: 300;
+
+$heading1Size: 3.5em;
+
+$linkColor: $nord7;
+$linkColorHover: lighten( $linkColor, 20% );
+
+// Change text colors against light slide backgrounds
+@include light-bg-text-color($nord1);
+
+
+// Template building
+@import "../node_modules/reveal.js/css/theme/template/theme.scss";
+
+// Custom styles after theme
+.reveal {
+    section {
+        font-weight: 400;
+        
+        strong, b {
+            color: $nord14;
+        }
+
+
+        iframe {
+            border: 10px solid $nord3;
+        }
+
+        .caption {
+            font-size: smaller;
+        }
+
+        .icon {
+            width: 1em;
+            margin: 0;
+            padding: 0;
+            vertical-align: middle;
+
+            svg > path {
+                fill: $nord14;
+            }
+        }
+
+        .nodiscs ul {
+            list-style-type: none;
+        }
+
+        ul > li > ul > li {
+            font-size: smaller;
+        }
+    }
+}
