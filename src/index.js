@@ -1,7 +1,13 @@
 import Reveal from 'reveal.js';
-import Notes from 'reveal.js/plugin/notes/notes.esm.js';import Markdown from 'reveal.js/plugin/markdown/markdown.esm.js';
+import Notes from 'reveal.js/plugin/notes/notes.esm.js';
+import Markdown from 'reveal.js/plugin/markdown/markdown.esm.js';
+import Highlight from 'reveal.js/plugin/highlight/highlight.esm.js';
+
+
 import content from 'bundle-text:./content.md';
 
+// Loaded as a script in the index.html
+const EmbedTweet = window.RevealEmbedTweet;
 
 document.addEventListener('DOMContentLoaded', function(){
 
@@ -12,10 +18,9 @@ document.addEventListener('DOMContentLoaded', function(){
       slideNumber: 'c/t',
       hashOneBasedIndex: true,
       hash: true,
-      loop: true,
       transition: 'fade',
       showNotes: false,
-      plugins: [ Markdown, Notes]
+      plugins: [ Markdown, Notes, Highlight, EmbedTweet]
    })
    deck.initialize();
 });

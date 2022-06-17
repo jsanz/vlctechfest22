@@ -1,4 +1,4 @@
-# Cumbre Vieja
+# **Cumbre Vieja**
 ## Análisis y visualización
 
 VLCTechFest | 2022-06-18 | Valencia
@@ -7,7 +7,7 @@ VLCTechFest | 2022-06-18 | Valencia
 
 note: Diapositiva de espera para arrancar la charla
 
----
+___
 
 ## Jorge Sanz
 
@@ -27,39 +27,77 @@ note: Diapositiva de espera para arrancar la charla
 
 note: Me presento, qué estudié, dónde trabajé
 
----
+___
 
 ## Agenda
 
+* Sobre la erupción
+* Primera iteración
+* Elastic Maps
+* Segunda iteración
+* Procesado de perímetros de lava y edificios
+* Resultado final
+
 ---
 
-## La erupción
+## La Palma
 
-<iframe width="100%" height="400px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-18.437118%2C28.3334%2C-17.29042%2C28.8904&amp;layer=mapnik"></iframe>
+<iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-33.44238281250001%2C18.521283325496288%2C-2.2412109375000004%2C37.82280243352759&amp;layer=mapnik&amp;marker=28.6129%2C-17.8647"></iframe>
 
 <p class="caption">
-<a href="https://www.openstreetmap.org/?#map=11/28.6123/-17.8638">Ver mapa</a>
+<a href="https://www.openstreetmap.org/?mlat=28.6129&mlon=-17.8647#map=16/28.6129/-17.8647">Ver mapa</a>
 </p>
 
 note: Como imagino casi todos sabréis, en las islas Canarias, La Palma está situada al oeste del archipiélago y como el resto de islas, tiene un origen volcánico.
 
----
+___
+## Erupciones anteriores
 
-## La erupción
+
+<div style="float:left;max-width:40%;margin-top:2em;">
+
+* San Juan, **1949** [![logo wikipedia](./imgs/wikipedia.svg "Logo de wikipedia")<!-- .element: class="icon"-->](https://es.wikipedia.org/wiki/Erupci%C3%B3n_volc%C3%A1nica_de_La_Palma_de_1949)
+* Teneguía **1971** [![logo wikipedia](./imgs/wikipedia.svg "Logo de wikipedia")<!-- .element: class="icon"-->](https://es.wikipedia.org/wiki/Erupci%C3%B3n_volc%C3%A1nica_de_La_Palma_de_1971)
+* [OSM ![logo OSM](./imgs/openstreetmap.svg "Logo de OSM")<!-- .element: class="icon"-->](https://overpass-turbo.eu/map.html?Q=%5Bout%3Ajson%5D%5Btimeout%3A25%5D%3B%0A(%0A%20%20way%5Bgeological%3Dvolcanic_lava_field%5D(28.430052892335723%2C-18.505096435546875%2C28.837455983116197%2C-17.214202880859375)%3B%0A%20%20relation%5Bgeological%3Dvolcanic_lava_field%5D(28.430052892335723%2C-18.505096435546875%2C28.837455983116197%2C-17.214202880859375)%3B%0A)%3B%0Aout%20body%3B%0A%3E%3B%0Aout%20skel%20qt%3B%0A)
+* [@picazomario](https://twitter.com/picazomario/status/1449986099992989699/photo/1)
+
+</div>
+
+<div style="float:right;max-width:50%">
+  <img src="./imgs/la-palma-lava-fields.png">
+</div>
+
+note: si bien la última ha sido la de mayor extensión, en la mitad sur de la isla hay diversos campos de lava fechados desde el siglo XVI, siendo los últimos eventos las erupciones del volcán de San Juan en 1949 y del Teneguía en 1971. 
+
+___
+
+## La erupción del <br/>Cumbre Vieja
 <!-- .slide: data-background-image="imgs/erupcion.jpg" data-background-opacity="0.25" -->
 
-* Erupciones anteriores en la Palma
-  * San Juan, **1949** [![](./imgs/wikipedia.svg)<!-- .element: class="icon"-->](https://es.wikipedia.org/wiki/Erupci%C3%B3n_volc%C3%A1nica_de_La_Palma_de_1949)
-  * Teneguía **1971** [![](./imgs/wikipedia.svg)<!-- .element: class="icon"-->](https://es.wikipedia.org/wiki/Erupci%C3%B3n_volc%C3%A1nica_de_La_Palma_de_1971)
-* Inicio: **19 de septiembre de 2001**
-* Fin: **13 de diciembre de 2001**
+* Inicio: **19 de septiembre de 2021**
+* Fin: **13 de diciembre de 2021**
 * **7.000** personas evacuadas
 * **1.000** hectáreas cubiertas por la lava
 * **3.000** edificios destruidos
 * **834** millones de euros en daños
+* **0** víctimas mortales
 
-_fuente: [![](./imgs/wikipedia.svg)<!-- .element: class="icon"--> wikipedia](https://en.wikipedia.org/wiki/2021_Cumbre_Vieja_volcanic_eruption)_
+_fuente: [![Logo de Wikipedia](./imgs/wikipedia.svg "Logo de wikipedia")<!-- .element: class="icon"--> wikipedia](https://en.wikipedia.org/wiki/2021_Cumbre_Vieja_volcanic_eruption)_
 <!-- .element class="caption" -->
+
+___
+
+<div class="tweet" data-src="https://twitter.com/Cahora/status/1450042407861604354?s=20&t=XRJtd02xT2FOuaowKzrSrA"></div>
+___
+
+<div class="tweet" data-src="https://twitter.com/Cahora/status/1449998849519538185?s=20&t=0lD_4Uu8952etY4ti1-aBA"></div>
+___
+
+<div class="tweet" data-src="https://twitter.com/involcan/status/1450217989224161285"></div>
+___
+
+<!-- .element: class="caption" -->
+<div class="tweet" data-src="https://twitter.com/Divulgameteo/status/1451065572607811584?"></div>
 
 
 ---
@@ -71,43 +109,381 @@ _fuente: [![](./imgs/wikipedia.svg)<!-- .element: class="icon"--> wikipedia](htt
 * Mapa animado de perímetros de lava
   * [ela.st/cumbre-vieja-eruption-map](https://ela.st/cumbre-vieja-eruption-map)
 
----
-<!-- .slide: data-background-image="imgs/cumbre-vieja-map.png" data-background-size="contain" -->
+___
 
+<!-- .slide: data-background-image="imgs/cumbre-vieja-map.png" data-background-size="contain" -->
 
 note: Pantallazo del mapa
 
+___
+
+<!-- .slide: data-background-image="./imgs/dashboard.gif" data-background-size="contain" -->
+
+note: Pequeño clip del cuadro de mando
+
 ---
-<!-- .slide: data-background-video="./imgs/cumbre-vieja-dashboard.webm" data-background-size="contain" data-background-video-loop="true" data-background-video-muted="true" -->
 
+## Idea inicial
 
+<div class="tweet" data-src="https://twitter.com/InnovaLaPalma/status/1441844516462292999?s=20&t=0lD_4Uu8952etY4ti1-aBA"></div>
 
----
+___
+
+> Cargar los datos de los perímetros y visualizarlos con Elastic Maps junto con la actividad sísmica
+
+___
 
 ## Datos disponibles
 
-* Portal de Open Data
-  * Perímetros de flujos de lava
-  * Edificios
-* Base de datos de terremetos del IGN
+* Portal de Open Data [opendatalapalma.es](https://www.opendatalapalma.es): 
+  * Imágenes y perímetros de flujos de lava
+* Instituto Geográfico Nacional [ign.es](https://www.ign.es):
+  * Información sísmica 
+
+___
+
+<!-- .slide: data-background-video="imgs/descarga-geojson.webm" data-background-size="contain"  data-background-video-loop="true" data-background-video-muted="true" -->
+
+___
+
+<!-- .slide: data-background-image="imgs/ign-terremotos.gif" data-background-size="contain" -->
+
+___
+
+## Exploración
+
+* Pruebas en **Jupyter Notebook**
+  * que nunca guardé 😢
+* **Descarga** y **procesado** de datos (GeoJSON)
+* **Carga** a Elasticsearch
+* ***Scrapping*** de los datos de terremotos
+* Proceso **iterativo**
 
 ---
 
-![](./imgs/opendatalapalma.png)
+## Elastic Maps
 
-https://www.opendatalapalma.es
+* Aplicación **GIS** en **Kibana**
+* Visualización de datos almacenados en **Elasticsearch**
+* Visualización de **otros orígenes** de datos
+* **Estilos** basados en propiedades
+* **Animación**
+
+___
+
+<!-- .slide: data-background-video="imgs/01-animation-imagery.mp4" data-background-size="contain"  data-background-video-loop="true" data-background-video-muted="true" -->
+
+___
+
+<!-- .slide: data-background-video="imgs/02-animation-quakes.mp4" data-background-size="contain"  data-background-video-loop="true" data-background-video-muted="true" -->
+___
+
+<!-- .slide: data-background-video="imgs/03-animation-footprints-1.mp4" data-background-size="contain"  data-background-video-loop="true" data-background-video-muted="true" -->
+___
+
+
+## Pero el desastre se **alarga**...
+
+![Meme de un gato confundido](./imgs/question.gif "Meme de un gato confundido")
 
 ---
 
-GeoJSON
+## Segunda iteración
+
+* **Reorganización** del código
+* Proceso **semiatendido** 😕
+* Automatización con **Github Actions**
+* Carga y procesado de **edificios**
+* Cuadro de mando en **Kibana**
+___
+
+## Aplicación _python_
+
+* [ ![github logo](./imgs/github.svg "Logo de github") <!-- .element: class="icon" --> github.com/jsanz/cumbre-vieja](https://github.com/jsanz/cumbre-vieja)
+* Carga de **credenciales** desde `.env` y variables de entorno
+* Crea **índices**
+* Utiliza la [**`Bulk API`**](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html) de Elasticsearch
+* Utiliza una **caché local** persistente para todas las peticiones de la bibloteca **`requests`**
+
+___
+
+### Ejemplo: carga de **bocas eruptivas**
+
+```python
+def upload_pits(client, overwrite=False):
+    exists = IndicesClient(client).exists(INDEX_NAME)
+    # Creates the pits index or exits
+    if exists:
+        if overwrite:
+            logger.info("Deleting the pits index...")
+            client.indices.delete(index=INDEX_NAME)
+        else:
+            logger.info("Skipping the pits")
+            return
+
+    logger.info("Creating the pits index...")
+    create_index(client)
+
+    logger.info("Getting the pits data...")
+    features = download_geojson(GEOJSON_URL)
+    logger.debug(f"{len(features)} pits downloaded")
+
+    # Bulk upload the records
+    logger.info(f"Uploading to ES {len(features)} records...")
+    bulk(client, get_actions(features))
+```
+
+[ ![github logo](./imgs/github.svg "Logo de github") <!-- .element: class="icon" --> `pits.py`](https://github.com/jsanz/cumbre-vieja/blob/main/src/pits.py)
+<!-- .element: class="caption" -->
+___
+
+## Interacción **necesaria**
+
+* El Portal de Open Data **no sigue**<br/> un esquema fijo de etiquetas 🤬
+* Activar **notificaciones** 🔔 a [@InnovaLaPalma](https://twitter.com/InnovaLaPalma) 
+* _Script_ para **explorar** el catálogo
+
+___
+
+<!-- .slide: data-background-video="./imgs/catalog-check.webm" data-background-size="contain" data-background-video-loop="true" data-background-video-muted="true" -->
+
+note: 
+
+___
+
+```python
+IDS = [
+    ["b67cf8802dbb416b82db806f51eb2314_0", "2021-12-15", "11:00"],
+    ["81554cf16075427fbad99f07167f898a_0", "2021-12-14", "10:30"],
+    ["7330afd39f814ef8af9ac84d3756e79f_0", "2021-12-13", "09:40"],
+    ["3467d91dd3d0419b98c29aaa4ddab888_0", "2021-12-12", "09:00"],
+    ["9e0a4897b28b4e238726e6312f8f67c1_0", "2021-12-07", "10:30"],
+    ["e7fcf6d3728c48a699732b91bc19010d_0", "2021-12-03", "10:15"],
+    ["ce639aa2b6714b818cec49db80ea9425_1", "2021-12-01", "10:00"],
+    ["3c980c4cb77f42b09f3d2f703090eed0_0", "2021-11-30", "10:20"],
+    ["f9a683035bd34555b02de67c40c95a78_0", "2021-11-29", "10:00"],
+    ...
+```
+
+[ ![github logo](./imgs/github.svg "Logo de github") <!-- .element: class="icon" --> `data.py`](https://github.com/jsanz/cumbre-vieja/blob/main/src/data.py)
+<!-- .element: class="caption" -->
+
+![Meme de coco confundido](./imgs/shrug.gif "Meme de coco confundido") <!-- .element: class="fragment"-->
+
+---
+## Github Actions
+
+* Motor de ejecución de **procesos**
+* **Código** en `.github/workflows`
+* Permite almacenar _assets_ en **caché**
+* <https://docs.github.com/en/actions>
+
+___
+
+## Github Actions: _trigger_
+
+```yaml
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'src/data.py'
+```
+
+[ ![github logo](./imgs/github.svg "Github logo") <!-- .element: class="icon" --> `.github/workflows/python-app.yml`](https://github.com/jsanz/cumbre-vieja/blob/2497c3745daa3d47da6b19333148e94282387477/.github/workflows/python-app.yml#L6-L10)
+<!-- .element: class="caption" -->
+___
+
+## Github Actions: _trigger_
+
+```yaml
+[...]
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install --upgrade --upgrade-strategy eager -r requirements.txt ; \
+    - name: Run the app
+      env:
+        ES_CLOUD_ID: ${{ secrets.ES_CLOUD_ID }}
+        ES_USER: ${{ secrets.ES_USER }}
+        ES_PASSWORD: ${{ secrets.ES_PASSWORD }}
+      run: |
+        python src/app.py
+```
+
+[ ![github logo](./imgs/github.svg "Github logo") <!-- .element: class="icon" --> `.github/workflows/python-app.yml`](https://github.com/jsanz/cumbre-vieja/blob/784d439c704c44c18472fb2c8ed7595e534c5c74/.github/workflows/python-app.yml#L32-L42)
+<!-- .element: class="caption" -->
+
+___
+
+<!-- .slide: data-background-image="./imgs/github-actions.gif" data-background-size="contain" -->
 
 ---
 
-## Primera iteración
+## Carga de edificios
 
-Jupyter Notebook
+* Capa de **polígonos** del portal de Open Data
+* **~200.000** registros
+* Datos de **área**, **tipo** de recinto y número de **plantas**
+
+![Datos de las edificaciones](./imgs/jq-edificaciones.png "Datos de las edificaciones")<!-- .element: style="width:400px"-->
+
+___
+
+
+> ¿Cómo saber si un edificio **intersecta** con un perímetro de lava?
+
+___
+
+## Procesar los perímetros
+
+* Calcular una nueva geometría con la diferencia con respecto al perímetro anterior
+
+![Diagrama de procesado de los perímetros](./imgs/clipped.png "Diagrama de procesado de los perímetros")<!-- .element: class="img-background" -->
+
+___
+
+## Procesar los perímetros
+
+* Calcular la **diferencia** con la geometría anterior
+* **Simplificar** la geometría
+* Borrar polígonos **pequeños**
+* Corregir geometrías **inválidas**
+
+```python
+# Compute the diff geom
+diff_geom = curr_geom
+              .difference(shape(prev_feature["geometry"]))
+              .simplify( TOLERANCE, preserve_topology=True )
+if diff_geom.geom_type == 'MultiPolygon':
+    # Remove small polygons
+    parts = len(diff_geom.geoms)
+    diff_geom = MultiPolygon([poly for poly in diff_geom.geoms if filter_area(poly)])
+
+# Try to fix any invalid geometries
+if not diff_geom.is_valid:
+    diff_geom = make_valid(diff_geom)
+if not diff_geom.is_valid:
+    diff_geom = diff_geom.buffer(0.0)
+```
+
+[ ![github logo](./imgs/github.svg "Github logo") <!-- .element: class="icon" --> `footprints.py`](https://github.com/jsanz/cumbre-vieja/blob/784d439c704c44c18472fb2c8ed7595e534c5c74/src/footprints.py#L123-L139)
+<!-- .element: class="caption" -->
+
+___
+
+## Elasticsearch ingest pipelines & enrich policies
+
+* _Elasticsearch ingest pipelines_ 
+  * Lógica al (re)indexar datos
+* _Enrich policy_
+  * Aumentar un documento con datos de otro
+  * Se pueden usar relaciones espaciales
+
+> ¡Podemos cruzar los edificios con las nuevas geometrías para darles la fecha en la que fueron cubiertos por la lava!
+<!-- .element: class="fragment" -->
+
+___
+
+## Política de **aumento** de datos
+
+```
+PUT /_enrich/policy/lapalma_lookup
+{
+  "geo_match": {
+    "indices": "lapalma",
+    "match_field": "diff_geometry",
+    "enrich_fields": ["id", "timestamp"],
+  }
+}
+```
+
+___
+
+## Pipeline 
+
+```
+PUT _ingest/pipeline/buildings_footprints
+{
+  "description": "Enrich buildings with Cumbre Vieja footprints.",
+  "processors": [
+    {
+      "enrich": {
+        "field": "geometry",
+        "policy_name": "lapalma_lookup",
+        "target_field": "footprints",
+        "shape_relation": "INTERSECTS",
+        "ignore_missing": True,
+        "ignore_failure": True,
+      }
+    }
+    ...
+  ],
+}
+```
+
+___
+
+## Aplicar el proceso
+
+* Tras cargar los nuevos perímetros ejecutamos una **actualización** del índice de edificios
+* Sólo se aplica sobre edificios en la **zona** que todavía no han sido **afectados**
+
+```
+POST buildings/_update_by_query?pipeline=buildings_footprints
+{
+  "query": {
+    "bool": {
+      "must_not": [ { "exists": { "field": "footprints.id" } } ],
+      "filter": {
+        "geo_bounding_box": {
+          "geometry": {
+            "top_left": { "lat": 28.647, "lon": -17.95 },
+            "bottom_right": { "lat": 28.58, "lon": -17.83 },
+          }
+        }
+      },
+    }
+  }
+}
+```
+
+___
+
+<!-- .slide: data-background-video="./imgs/05-animation-buildings.mp4" data-background-size="contain" data-background-video-loop="true" data-background-video-muted="true" -->
+
+---
+
+## Cuadro de mando en **Kibana**
+
+* [ela.st/cumbre-vieja-eruption](https://ela.st/cumbre-vieja-eruption)
+* **Mapa** con los perímetros
+  * [ela.st/cumbre-vieja-eruption-map](https://ela.st/cumbre-vieja-eruption-map)
+* **Mapa** con los terremotos según magnitud
+* Grupo de gráficas:
+  * sobre los **terremotos**
+  * sobre los **edificios**
+  * sobre los vuelos de los **drones**
+
+___
+
+<!-- .slide: data-background-image="./imgs/dashboard-1.png" data-background-size="contain" -->
+___
+
+<!-- .slide: data-background-image="./imgs/dashboard-2.png" data-background-size="contain" -->
 
 ---
 
 
+## Para saber más
 
+* [Blog de Elastic](https://www.elastic.co/blog/understanding-evolution-volcano-eruption-elastic-maps): Sobre las animaciones en Elastic Maps en este proyecto
+* [Calendario de adviento de 2021](https://discuss.elastic.co/t/dec-23rd-2021-es-aumentando-documentos-con-la-politica-geo-match/292462): Aumentando documentos con la política `geo_match`
+
+___
+
+# **¡Gracias!**
+
+![QR de la charla](./imgs/qr.png "QR de la charla")
+
+[ela.st/vlctechfest2022](https://ela.st/vlctechfest2022)
