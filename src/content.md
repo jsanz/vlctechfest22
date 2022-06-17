@@ -88,17 +88,23 @@ _fuente: [![Logo de Wikipedia](./imgs/wikipedia.svg "Logo de wikipedia")<!-- .el
 ___
 
 <div class="tweet" data-src="https://twitter.com/Cahora/status/1450042407861604354?s=20&t=XRJtd02xT2FOuaowKzrSrA"></div>
+
+note: algunas imágenes del desastre
 ___
 
 <div class="tweet" data-src="https://twitter.com/Cahora/status/1449998849519538185?s=20&t=0lD_4Uu8952etY4ti1-aBA"></div>
+
+note: algunas imágenes del desastre
 ___
 
 <div class="tweet" data-src="https://twitter.com/involcan/status/1450217989224161285"></div>
+
+note: algunas imágenes del desastre
 ___
 
-<!-- .element: class="caption" -->
 <div class="tweet" data-src="https://twitter.com/Divulgameteo/status/1451065572607811584?"></div>
 
+note: algunas imágenes del desastre
 
 ---
 
@@ -109,6 +115,7 @@ ___
 * Mapa animado de perímetros de lava
   * [ela.st/cumbre-vieja-eruption-map](https://ela.st/cumbre-vieja-eruption-map)
 
+note: vamos a ver el resultado final de este proyecto 
 ___
 
 <!-- .slide: data-background-image="imgs/cumbre-vieja-map.png" data-background-size="contain" -->
@@ -127,10 +134,12 @@ note: Pequeño clip del cuadro de mando
 
 <div class="tweet" data-src="https://twitter.com/InnovaLaPalma/status/1441844516462292999?s=20&t=0lD_4Uu8952etY4ti1-aBA"></div>
 
+note: La idea vino de un tweet de la gente del servicio de innovación del Cabildo de La Palma, en el que comentaban que estaban publicando los perímetros e imágenes capturados por el dron con el que estaban volando en la zona afectada
 ___
 
 > Cargar los datos de los perímetros y visualizarlos con Elastic Maps junto con la actividad sísmica
 
+note: Asi que la primera idea fue por qué no cargar esos datos en Elastic Maps y probar una nueva funcionalidad que acabábamos de desarrollar.
 ___
 
 ## Datos disponibles
@@ -144,10 +153,13 @@ ___
 
 <!-- .slide: data-background-video="imgs/descarga-geojson.webm" data-background-size="contain"  data-background-video-loop="true" data-background-video-muted="true" -->
 
+note: el portal de open data permite buscar datos y descargarlos en diferentes formatos. Dispone también de una API sencilla para hacer consultas
+
 ___
 
 <!-- .slide: data-background-image="imgs/ign-terremotos.gif" data-background-size="contain" -->
 
+note: Por otro lado el sevicio de información sísmica del IGN dispone de un formulario que por suerte es fácil de scrappear para no tener que introducir a mano esos parámetros una y otra vez.
 ___
 
 ## Exploración
@@ -159,6 +171,8 @@ ___
 * ***Scrapping*** de los datos de terremotos
 * Proceso **iterativo**
 
+note: en esta primera fase fui explorando con Jupyter Notebook la descarga y procesado de los datos ya que no se podían cargar directamente, además del scrapping. Fue un proceso iterativo de ir mejorando tanto el proceso como la forma de los datos en Elasticsearch.
+
 ---
 
 ## Elastic Maps
@@ -169,22 +183,32 @@ ___
 * **Estilos** basados en propiedades
 * **Animación**
 
+note: descripción de Elastic Maps
+
 ___
 
 <!-- .slide: data-background-video="imgs/01-animation-imagery.mp4" data-background-size="contain"  data-background-video-loop="true" data-background-video-muted="true" -->
 
+note: carga de imágenes de satélite
+
 ___
 
 <!-- .slide: data-background-video="imgs/02-animation-quakes.mp4" data-background-size="contain"  data-background-video-loop="true" data-background-video-muted="true" -->
+
+note: animación de terremotos (datos puntuales)
 ___
 
 <!-- .slide: data-background-video="imgs/03-animation-footprints-1.mp4" data-background-size="contain"  data-background-video-loop="true" data-background-video-muted="true" -->
+
+note: animación de polígonos de los perímetros de lava
 ___
 
 
 ## Pero el desastre se **alarga**...
 
 ![Meme de un gato confundido](./imgs/question.gif "Meme de un gato confundido")
+
+note: lo que pensaba que iba a ser cosa de unos pocos días se va alargando y por tanto no tiene sentido estar cacharreando con el notebook y algo más automatizado va a ser mucho mejor.
 
 ---
 
@@ -195,6 +219,8 @@ ___
 * Automatización con **Github Actions**
 * Carga y procesado de **edificios**
 * Cuadro de mando en **Kibana**
+
+note: Reorganizo el código para que se pueda ejecutar de manera más desatendida, en Github Actions y añadiendo nuevos datos que dan más interés al mapa y finalmente creo un cuadro de mando que aglutina toda la información recopilada.
 ___
 
 ## Aplicación _python_
@@ -204,6 +230,8 @@ ___
 * Crea **índices**
 * Utiliza la [**`Bulk API`**](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html) de Elasticsearch
 * Utiliza una **caché local** persistente para todas las peticiones de la bibloteca **`requests`**
+
+note: el código de los notebooks se convierte en un script de python que no requiere de ninguna interacción, recibe las credenciales para cargar datos en Elasticsearch y se encarga de crear los índices y cargar los datos de la manera más eficiente. Además para evitar descargas sucesivas, se utiliza una caché para la biblioteca requests.
 
 ___
 
@@ -235,19 +263,23 @@ def upload_pits(client, overwrite=False):
 
 [ ![github logo](./imgs/github.svg "Logo de github") <!-- .element: class="icon" --> `pits.py`](https://github.com/jsanz/cumbre-vieja/blob/main/src/pits.py)
 <!-- .element: class="caption" -->
+
+note: este sería el ejemplo más sencillo de carga de las bocas eruptivas, incluyendo la posibilidad de sobreescribir los datos.
 ___
 
 ## Interacción **necesaria**
 
+* Cada perímetro se sube como un<br/> **dataset nuevo** con un único registro
 * El Portal de Open Data **no sigue**<br/> un esquema fijo de etiquetas 🤬
 * Activar **notificaciones** 🔔 a [@InnovaLaPalma](https://twitter.com/InnovaLaPalma) 
 * _Script_ para **explorar** el catálogo
 
+note: pero por desgracia, la forma en la que suben los datos al portal de open data hace imposible automatizar el proceso, ya que cada nuevo perímetro se carga en un datatet nuevo que no hay manera de averiguar automáticamente.
 ___
 
 <!-- .slide: data-background-video="./imgs/catalog-check.webm" data-background-size="contain" data-background-video-loop="true" data-background-video-muted="true" -->
 
-note: 
+note: con un sencillo script exploro los datasets que se han añadido recientemente al catálogo y me quedo con el identificador y fecha del dato.
 
 ___
 
@@ -270,6 +302,8 @@ IDS = [
 
 ![Meme de coco confundido](./imgs/shrug.gif "Meme de coco confundido") <!-- .element: class="fragment"-->
 
+note: y los añado a un simple array en un fichero. Esa es la única interacción que tengo que hacer más o menos a diario durante las semanas del evento.
+
 ---
 ## Github Actions
 
@@ -278,6 +312,7 @@ IDS = [
 * Permite almacenar _assets_ en **caché**
 * <https://docs.github.com/en/actions>
 
+note: al subir esos datos Github Action se va a encargar de ejecutar el script
 ___
 
 ## Github Actions: _trigger_
@@ -292,12 +327,13 @@ on:
 
 [ ![github logo](./imgs/github.svg "Github logo") <!-- .element: class="icon" --> `.github/workflows/python-app.yml`](https://github.com/jsanz/cumbre-vieja/blob/2497c3745daa3d47da6b19333148e94282387477/.github/workflows/python-app.yml#L6-L10)
 <!-- .element: class="caption" -->
+
+note: un detalle interesante es que se puede especificar qué ficheros se deben haber modificado para que la acción se ejecute.
 ___
 
 ## Github Actions: _trigger_
 
 ```yaml
-[...]
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -314,6 +350,8 @@ ___
 [ ![github logo](./imgs/github.svg "Github logo") <!-- .element: class="icon" --> `.github/workflows/python-app.yml`](https://github.com/jsanz/cumbre-vieja/blob/784d439c704c44c18472fb2c8ed7595e534c5c74/.github/workflows/python-app.yml#L32-L42)
 <!-- .element: class="caption" -->
 
+note: y por lo demás ejecutar software es bastante sencillo
+
 ___
 
 <!-- .slide: data-background-image="./imgs/github-actions.gif" data-background-size="contain" -->
@@ -328,6 +366,8 @@ ___
 
 ![Datos de las edificaciones](./imgs/jq-edificaciones.png "Datos de las edificaciones")<!-- .element: style="width:400px"-->
 
+note: con la automatización terminada me podía centrar en mejorar el análisis añadiendo los edificios. Es un dataset mediano de unos 350MB.
+
 ___
 
 
@@ -341,14 +381,19 @@ ___
 
 ![Diagrama de procesado de los perímetros](./imgs/clipped.png "Diagrama de procesado de los perímetros")<!-- .element: class="img-background" -->
 
+note: para asegurar que un punto en el territorio sólo intersecta con un perímetro o ninguno, hay que "cortarlos"
 ___
 
 ## Procesar los perímetros
 
-* Calcular la **diferencia** con la geometría anterior
+<div style="font-size:smaller;">
+
+* Shapely
+* Calcular la **diferencia** con la geometría anterior 
 * **Simplificar** la geometría
 * Borrar polígonos **pequeños**
 * Corregir geometrías **inválidas**
+
 
 ```python
 # Compute the diff geom
@@ -367,21 +412,26 @@ if not diff_geom.is_valid:
     diff_geom = diff_geom.buffer(0.0)
 ```
 
+</div>
+
 [ ![github logo](./imgs/github.svg "Github logo") <!-- .element: class="icon" --> `footprints.py`](https://github.com/jsanz/cumbre-vieja/blob/784d439c704c44c18472fb2c8ed7595e534c5c74/src/footprints.py#L123-L139)
 <!-- .element: class="caption" -->
 
+note: Esto se hace en el proceso de carga usando la blioteca de análisis geoespacial shapely, que permite hacer el recorte, para luego filtrar si han quedado polígonos "espúreos", así como tratar de arreglar las geometrías que se hayan podido romper en el proceso.
 ___
 
 ## Elasticsearch ingest pipelines & enrich policies
 
 * _Elasticsearch ingest pipelines_ 
-  * Lógica al (re)indexar datos
+  * **Lógica** al (re)indexar datos
 * _Enrich policy_
-  * Aumentar un documento con datos de otro
-  * Se pueden usar relaciones espaciales
+  * **Aumentar** un documento con datos de otro
+  * Se pueden usar **relaciones espaciales**
 
 > ¡Podemos cruzar los edificios con las nuevas geometrías para darles la fecha en la que fueron cubiertos por la lava!
 <!-- .element: class="fragment" -->
+
+note: con los perímetros listos nos queda procesar los edificios. Para eso vamos a usar una característica de Elasticsearch que permite ejecutar lógicas al indexar o reindexar datos, siendo una de las posibilidades la de enriquecer documentos a partir de datos almacenados en un índice de referencia. Una de las posibilidades es aplicar relaciones geográficas, que en este caso es justo lo que necesitamos.
 
 ___
 
@@ -397,6 +447,8 @@ PUT /_enrich/policy/lapalma_lookup
   }
 }
 ```
+
+note: primero creamos la política que define dónde están los datos de referencia, qué campo tiene la geometría y qué campos queremos transferir.
 
 ___
 
@@ -421,6 +473,8 @@ PUT _ingest/pipeline/buildings_footprints
   ],
 }
 ```
+
+note: esa política se incluye en uno de los procesadores de la pipeline, indicando el campo origen en los documentos que se van a insertar, qué relación espacial deberá tener con el índice de referencia, y finalmente qué nombre va a tener el campo que contenga los datos provenientes del índice de referencia. 
 
 ___
 
@@ -448,6 +502,8 @@ POST buildings/_update_by_query?pipeline=buildings_footprints
 }
 ```
 
+note: esta pipeline la usaremos cada vez que añadamos datos al índice de los perímetros. Tras insertar datos nuevos reindexaremos los edificios, pero sólo buscando en aquellos documentos que se encuentren en la zona de estudio y que no tengan todavía datos de perímetros. De esta forma el procesado sólo se ejecuta sobre los posibles candidatos.
+
 ___
 
 <!-- .slide: data-background-video="./imgs/05-animation-buildings.mp4" data-background-size="contain" data-background-video-loop="true" data-background-video-muted="true" -->
@@ -465,6 +521,7 @@ ___
   * sobre los **edificios**
   * sobre los vuelos de los **drones**
 
+note: finalmente podemos poner toda la información en un único cuadro de mando en Kibana: un par de mapas uno de perímetros y otro con los terremotos y un juego de gráficas de diferente tipo pero que se puede decir que se agrupan entre aquellas que dan métricas sobre los vuelos de los drones, o sobre los terremotos, o sobre los edificios afectados por la erupción.
 ___
 
 <!-- .slide: data-background-image="./imgs/dashboard-1.png" data-background-size="contain" -->
@@ -474,11 +531,12 @@ ___
 
 ---
 
-
 ## Para saber más
 
 * [Blog de Elastic](https://www.elastic.co/blog/understanding-evolution-volcano-eruption-elastic-maps): Sobre las animaciones en Elastic Maps en este proyecto
 * [Calendario de adviento de 2021](https://discuss.elastic.co/t/dec-23rd-2021-es-aumentando-documentos-con-la-politica-geo-match/292462): Aumentando documentos con la política `geo_match`
+
+note: Y esto es todo, os dejo un par de enlaces con detalles tanto de la parte de Elastic Maps y las animaciones como una entrada en el calendario de adviento que hacemos en Elastic cada año donde conté con detalle el tema del enriquecimiento de los edificios.
 
 ___
 
